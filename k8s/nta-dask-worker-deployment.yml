@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nta-dask-worker
+  name: nta-dask-worker
+  namespace: qed-kube-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nta-dask-worker
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nta-dask-worker
+    spec:
+      containers:
+#      - env:
+#        - name: IN_DOCKER
+#          value: "True"
+#        - name: PYTHONPATH
+#          value: /src:/src/qed:/src_flask
+#        - name: UBERTOOL_REST_SERVER
+#          value: http://qed-nginx:7777
+      - image: dbsmith88/nta-dask:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - ls
+              - /
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        name: nta-dask-worker
+#        volumeMounts:
+#        - mountPath: /src_flask
+#          name: qed-flask
+#        - mountPath: /src
+#          name: qed-django
+      dnsPolicy: ClusterFirst
+      hostname: nta-dask-worker
+      restartPolicy: Always
+      schedulerName: default-scheduler
+#      volumes:
+#      - name: qed-flask
+#        persistentVolumeClaim:
+#          claimName: qed-flask
+#      - name: qed-django
+#        persistentVolumeClaim:
+#          claimName: qed-django-pvolume-claim1

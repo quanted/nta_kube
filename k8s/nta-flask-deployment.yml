@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nta-flask
+  name: nta-flask
+  namespace: qed-kube-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nta-flask
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nta-flask
+    spec:
+      containers:
+#      - env:
+#        - name: REDIS_HOSTNAME
+#          value: redis
+#        - name: DOCKER_HOSTNAME
+#          value: QED-KUBERNETES
+      - image: dbsmith88/nta-flask:latest
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          timeoutSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        name: nta-flask
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+#        volumeMounts:
+#        - mountPath: /src
+#          name: qed-flask-v
+#        - mountPath: /src/collected-static
+#          name: collected-static
+#        - mountPath: /src/app-data
+#          name: app-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+#      volumes:
+#      - name: qed-flask-v
+#        persistentVolumeClaim:
+#          claimName: qed-flask
+#      - name: app-data
+#        persistentVolumeClaim:
+#          claimName: app-data-pvolume-claim1
+#      - name: collected-static
+#        persistentVolumeClaim:
+#          claimName: collected-static-pvolume-claim1
