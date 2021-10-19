@@ -18,13 +18,6 @@ spec:
         app: nta-dask-worker
     spec:
       containers:
-#      - env:
-#        - name: IN_DOCKER
-#          value: "True"
-#        - name: PYTHONPATH
-#          value: /src:/src/qed:/src_flask
-#        - name: UBERTOOL_REST_SERVER
-#          value: http://qed-nginx:7777
       - image: dbsmith88/nta-dask:latest
         imagePullPolicy: Always
         livenessProbe:
@@ -51,19 +44,7 @@ spec:
             memory: "2Gi"
             cpu: "2000m"
         name: nta-dask-worker
-#        volumeMounts:
-#        - mountPath: /src_flask
-#          name: qed-flask
-#        - mountPath: /src
-#          name: qed-django
       dnsPolicy: ClusterFirst
       hostname: nta-dask-worker
       restartPolicy: Always
       schedulerName: default-scheduler
-#      volumes:
-#      - name: qed-flask
-#        persistentVolumeClaim:
-#          claimName: qed-flask
-#      - name: qed-django
-#        persistentVolumeClaim:
-#          claimName: qed-django-pvolume-claim1

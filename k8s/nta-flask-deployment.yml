@@ -18,11 +18,6 @@ spec:
         app: nta-flask
     spec:
       containers:
-#      - env:
-#        - name: REDIS_HOSTNAME
-#          value: redis
-#        - name: DOCKER_HOSTNAME
-#          value: QED-KUBERNETES
       - image: dbsmith88/nta-flask:dev-k
         imagePullPolicy: Always
         readinessProbe:
@@ -48,23 +43,13 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
-#        volumeMounts:
-#        - mountPath: /src
-#          name: qed-flask-v
-#        - mountPath: /src/collected-static
-#          name: collected-static
-#        - mountPath: /src/app-data
-#          name: app-data
+        volumeMounts:
+        - mountPath: /src/app-data
+          name: app-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-#      volumes:
-#      - name: qed-flask-v
-#        persistentVolumeClaim:
-#          claimName: qed-flask
-#      - name: app-data
-#        persistentVolumeClaim:
-#          claimName: app-data-pvolume-claim1
-#      - name: collected-static
-#        persistentVolumeClaim:
-#          claimName: collected-static-pvolume-claim1
+      volumes:
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: app-data-pvolume-claim1
