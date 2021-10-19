@@ -23,7 +23,7 @@ spec:
 #          value: redis
 #        - name: DOCKER_HOSTNAME
 #          value: QED-KUBERNETES
-      - image: dbsmith88/nta-flask:latest
+      - image: dbsmith88/nta-flask:dev-k
         imagePullPolicy: Always
         readinessProbe:
           tcpSocket:
