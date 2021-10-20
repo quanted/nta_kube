@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dask-scheduler
+  name: nta-dask-scheduler
   namespace: qed-kube-dev
 spec:
   ports:
@@ -12,7 +12,7 @@ spec:
   - name: dask2
     port: 8787
     protocol: TCP
-    targetPort: 8787W
+    targetPort: 8787
   selector:
-    app: dask-scheduler
+    app: nta-dask-scheduler
   type: ClusterIP

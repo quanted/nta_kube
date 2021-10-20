@@ -24,6 +24,10 @@ spec:
           value: settings
         - name: SECRET_KEY
           value: "wx$p52y!1p!*p$$y^d!f9@5=)3o#88+08-i9_mc8*-8h+x2&@w"
+        - name: DASK_SCHEDULER
+          value: nta-dask-scheduler:8786
+        - name: MONGO_SERVER
+          value: nta-mongodb:27017
         image: dbsmith88/nta-django:dev-k
         imagePullPolicy: Always
         readinessProbe:

@@ -18,8 +18,16 @@ spec:
         app: nta-dask-worker
     spec:
       containers:
-      - image: dbsmith88/nta-dask:latest
+      - args:
+        - dask-worker
+        - nta-dask-scheduler:8786
+        image: dbsmith88/nta-dask:latest
         imagePullPolicy: Always
+        env:
+        - name: DASK_SCHEDULER
+          value: nta-dask-scheduler:8786
+        - name: MONGO_SERVER
+          value: nta-mongodb:27017
         livenessProbe:
           exec:
             command:

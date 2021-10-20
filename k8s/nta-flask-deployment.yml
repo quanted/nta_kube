@@ -20,6 +20,11 @@ spec:
       containers:
       - image: dbsmith88/nta-flask:dev-k
         imagePullPolicy: Always
+        env:
+          - name: DASK_SCHEDULER
+            value: nta-dask-scheduler:8786
+          - name: MONGO_SERVER
+            value: nta-mongodb:27017
         readinessProbe:
           tcpSocket:
             port: 8080

@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: mongodb
-  name: mongodb
+    app: nta-mongodb
+  name: nta-mongodb
   namespace: qed-kube-dev
 spec:
   podManagementPolicy: OrderedReady
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
-  serviceName: mongodb
+      app: nta-mongodb
+  serviceName: nta-mongodb
   template:
     metadata:
       labels:
-        app: mongodb
+        app: nta-mongodb
     spec:
       containers:
       - image: dbsmith88/mongodb:latest
@@ -28,7 +28,7 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
-        name: mongodb
+        name: nta-mongodb
         readinessProbe:
           exec:
             command:
@@ -48,14 +48,14 @@ spec:
           protocol: TCP
         volumeMounts:
         - mountPath: /data/db
-          name: mongodb-pvolume
+          name: nta-mongodb-pvc
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       volumes:
-      - name: mongodb-pvolume
+      - name: nta-mongodb-pvc
         persistentVolumeClaim:
-          claimName: mongodb-pvc
+          claimName: nta-mongodb-pvc
   updateStrategy:
     rollingUpdate:
       partition: 0
