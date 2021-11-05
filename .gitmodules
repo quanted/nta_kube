@@ -4,3 +4,6 @@
 [submodule "nta_flask"]
 	path = nta_flask
 	url = https://github.com/quanted/nta_flask.git
+[submodule "nta_nginx"]
+	path = nta_nginx
+	url = https://github.com/quanted/nta_nginx.git
