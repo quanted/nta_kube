@@ -4,7 +4,6 @@ metadata:
   labels:
     app: nta-dask-worker
   name: nta-dask-worker
-  namespace: qed-kube-dev
 spec:
   replicas: 1
   selector:
@@ -23,11 +22,9 @@ spec:
         - nta-dask-scheduler:8786
         image: dbsmith88/nta-dask:latest
         imagePullPolicy: Always
-        env:
-        - name: DASK_SCHEDULER
-          value: nta-dask-scheduler:8786
-        - name: MONGO_SERVER
-          value: nta-mongodb:27017
+        envFrom:
+          - configMapRef:
+              name: nta-config
         livenessProbe:
           exec:
             command:

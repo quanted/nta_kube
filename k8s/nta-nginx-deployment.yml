@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nta-nginx
+  name: nta-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nta-nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nta-nginx
+    spec:
+      containers:
+        - image: dbsmith88/nta-nginx
+          imagePullPolicy: Always
+          name: nginx
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - mountPath: /src/collected_static
+              name: collected-static
+      restartPolicy: Always
+      volumes:
+        - name: collected-static
+          hostPath:
+            path: /host/collected-static
+#      volumes:
+#        - name: collected-static
+#          persistentVolumeClaim:
+#            collected-static-pvc

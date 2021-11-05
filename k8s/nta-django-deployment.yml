@@ -4,10 +4,8 @@ metadata:
   labels:
     app: nta-django
   name: nta-django
-  namespace: qed-kube-dev
 spec:
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: nta-django
@@ -19,34 +17,28 @@ spec:
         app: nta-django
     spec:
       containers:
-      - env:
-        - name: DJANGO_SETTINGS_MODULE
-          value: settings
-        - name: SECRET_KEY
-          value: "wx$p52y!1p!*p$$y^d!f9@5=)3o#88+08-i9_mc8*-8h+x2&@w"
-        - name: DASK_SCHEDULER
-          value: nta-dask-scheduler:8786
-        - name: MONGO_SERVER
-          value: nta-mongodb:27017
+      - envFrom:
+          - configMapRef:
+              name: nta-config
         image: dbsmith88/nta-django:dev-k
         imagePullPolicy: Always
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 30
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
+#        readinessProbe:
+#          tcpSocket:
+#            port: 8080
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#        livenessProbe:
+#          tcpSocket:
+#            port: 8080
+#          initialDelaySeconds: 30
+#          periodSeconds: 30
+#        resources:
+#          requests:
+#            memory: "512Mi"
+#            cpu: "250m"
+#          limits:
+#            memory: "1Gi"
+#            cpu: "1000m"
         name: nta-django
         ports:
         - containerPort: 8080
@@ -60,9 +52,16 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       volumes:
-      - name: collected-static
-        persistentVolumeClaim:
-          claimName: collected-static-pvolume-claim1
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: app-data-pvolume-claim1
+        - name: collected-static
+          hostPath:
+            path: /host/collected-static
+        - name: app-data
+          hostPath:
+            path: /host/app-data
+#      volumes:
+#      - name: collected-static
+#        persistentVolumeClaim:
+#          claimName: collected-static-pvc
+#      - name: app-data
+#        persistentVolumeClaim:
+#          claimName: app-data-pvc

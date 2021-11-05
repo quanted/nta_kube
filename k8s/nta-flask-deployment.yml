@@ -4,7 +4,6 @@ metadata:
   labels:
     app: nta-flask
   name: nta-flask
-  namespace: qed-kube-dev
 spec:
   replicas: 1
   selector:
@@ -20,23 +19,21 @@ spec:
       containers:
       - image: dbsmith88/nta-flask:dev-k
         imagePullPolicy: Always
-        env:
-          - name: DASK_SCHEDULER
-            value: nta-dask-scheduler:8786
-          - name: MONGO_SERVER
-            value: nta-mongodb:27017
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 30
-          timeoutSeconds: 10
+        envFrom:
+          - configMapRef:
+              name: nta-config
+#        readinessProbe:
+#          tcpSocket:
+#            port: 8080
+#          initialDelaySeconds: 5
+#          periodSeconds: 10
+#          timeoutSeconds: 10
+#        livenessProbe:
+#          tcpSocket:
+#            port: 8080
+#          initialDelaySeconds: 15
+#          periodSeconds: 30
+#          timeoutSeconds: 10
         resources:
           requests:
             memory: "512Mi"
@@ -54,7 +51,11 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
+#      volumes:
+#      - name: app-data
+#        persistentVolumeClaim:
+#          claimName: app-data-pvc
       volumes:
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: app-data-pvolume-claim1
+        - name: app-data
+          hostPath:
+            path: /host/app-data
