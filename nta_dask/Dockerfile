@@ -1,4 +1,4 @@
-FROM daskdev/dask:2021.9.1-py3.9
+FROM daskdev/dask:2021.11.0-py3.9
 
 RUN apt-get update --allow-releaseinfo-change -y
 RUN apt-get upgrade --fix-missing -y
