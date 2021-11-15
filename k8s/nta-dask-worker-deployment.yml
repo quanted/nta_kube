@@ -18,6 +18,11 @@ spec:
     spec:
       containers:
       - args:
+        - conda
+        - run
+        - -n
+        - pyenv
+        - --no-capture-output
         - dask-worker
         - nta-dask-scheduler:8786
         image: dbsmith88/nta-dask:latest
