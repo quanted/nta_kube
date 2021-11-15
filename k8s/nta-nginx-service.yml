@@ -7,7 +7,7 @@ spec:
     app: nta-nginx
   ports:
     - protocol: TCP
-      port: 443
+      port: 30001
       targetPort: 443
       name: http
   type: LoadBalancer
