@@ -22,6 +22,11 @@ spec:
     spec:
       containers:
       - args:
+        - conda
+        - run
+        - -n
+        - pyenv
+        - --no-capture-output
         - dask-scheduler
         image: dbsmith88/nta-dask:latest
         imagePullPolicy: Always
