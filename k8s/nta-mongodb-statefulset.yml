@@ -45,12 +45,18 @@ spec:
         ports:
         - containerPort: 27017
           protocol: TCP
-#        volumeMounts:
+        volumeMounts:
 #        - mountPath: /data/db
 #          name: nta-mongodb-pvc
+        - mountPath: /data/db
+          name: app-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
+      volumes:
+        - name: app-data
+          hostPath:
+            path: /host/app-data
 #      volumes:
 #      - name: nta-mongodb-pvc
 #        persistentVolumeClaim:
