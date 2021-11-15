@@ -2,7 +2,7 @@ FROM daskdev/dask:2021.11.0-py3.9
 
 RUN apt-get update --allow-releaseinfo-change -y
 RUN apt-get upgrade --fix-missing -y
-RUN apt-get install --no-install-recommends git build-essential python3-dev libpq-dev -y --fix-missing && \
+RUN apt-get install --no-install-recommends git build-essential python3.9.8 python3-dev libpq-dev -y --fix-missing && \
     pip install -U pip
 
 WORKDIR /src/
