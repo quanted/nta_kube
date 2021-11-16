@@ -51,17 +51,17 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      volumes:
-        - name: collected-static
-          hostPath:
-            path: /host/collected-static
-        - name: app-data
-          hostPath:
-            path: /host/app-data
 #      volumes:
-#      - name: collected-static
-#        persistentVolumeClaim:
-#          claimName: collected-static-pvc
-#      - name: app-data
-#        persistentVolumeClaim:
-#          claimName: app-data-pvc
+#        - name: collected-static
+#          hostPath:
+#            path: /host/collected-static
+#        - name: app-data
+#          hostPath:
+#            path: /host/app-data
+      volumes:
+      - name: collected-static
+        persistentVolumeClaim:
+          claimName: collected-static-pvolume-claim1
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: app-data-pvolume-claim1

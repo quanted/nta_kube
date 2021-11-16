@@ -9,5 +9,5 @@ data:
   DASK_SCHEDULER: "nta-dask-scheduler:8786"
   DJANGO_SETTINGS_MODULE: "settings"
   MONGO_SERVER: "nta-mongodb:27017"
-  SECRET_KEY: "wx$p52y!1p!*p$$y^d!f9@5=)3o#88+08-i9_mc8*-8h+x2&@w"
+  SECRET_KEY: "wx$p52y!1p!*p$$y^d1!f9@5=)3o#88+08-i9_mc8*-8h+x2&@w"
   UBERTOOL_REST_SERVER: "https://qed.edap-cluster.com/nta_flask_api"

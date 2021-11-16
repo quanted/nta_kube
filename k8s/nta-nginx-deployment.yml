@@ -26,11 +26,11 @@ spec:
             - mountPath: /src/collected_static
               name: collected-static
       restartPolicy: Always
-      volumes:
-        - name: collected-static
-          hostPath:
-            path: /host/collected-static
 #      volumes:
 #        - name: collected-static
-#          persistentVolumeClaim:
-#            collected-static-pvc
+#          hostPath:
+#            path: /host/collected-static
+      volumes:
+        - name: collected-static
+          persistentVolumeClaim:
+            collected-static-pvolume-claim1
