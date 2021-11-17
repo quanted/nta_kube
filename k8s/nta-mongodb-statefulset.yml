@@ -22,7 +22,7 @@ spec:
 #        command: ['mongod']
         env:
           - name: DB_PATH
-            value: /tmp/data
+            value: /tmp/data/nta
         resources:
           requests:
             memory: "512Mi"
