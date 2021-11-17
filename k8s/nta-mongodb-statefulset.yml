@@ -52,7 +52,7 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       volumes:
-      - name: mongodb-pvc
+      - name: mongodb-pvolume-claim1
         persistentVolumeClaim:
           claimName: mongodb-pvolume-claim1
 
