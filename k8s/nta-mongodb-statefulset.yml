@@ -17,9 +17,12 @@ spec:
         app: nta-mongodb
     spec:
       containers:
-      - image: mongo:latest
+      - image: dbsmith88/nta-mongo
         imagePullPolicy: Always
 #        command: ['mongod']
+        env:
+          - name: DB_PATH
+            value: /tmp/data
         resources:
           requests:
             memory: "512Mi"
@@ -46,7 +49,7 @@ spec:
         - containerPort: 27017
           protocol: TCP
         volumeMounts:
-        - mountPath: /data/db
+        - mountPath: /tmp/data
           name: mongodb-pvolume-claim1
       dnsPolicy: ClusterFirst
       restartPolicy: Always
