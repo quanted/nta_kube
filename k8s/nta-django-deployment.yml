@@ -44,7 +44,7 @@ spec:
         - containerPort: 8080
           protocol: TCP
         volumeMounts:
-        - mountPath: /src/collected_static
+        - mountPath: /src/nta_app/collected_static
           name: collected-static
         - mountPath: /src/app-data
           name: app-data
