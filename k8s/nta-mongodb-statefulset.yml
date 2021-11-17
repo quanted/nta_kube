@@ -48,14 +48,14 @@ spec:
         ports:
         - containerPort: 27017
           protocol: TCP
-        volumeMounts:
-        - mountPath: /tmp/data
-          name: mongodb-pvolume-claim1
+#        volumeMounts:
+#        - mountPath: /tmp/data
+#          name: mongodb-pvolume-claim1
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      volumes:
-      - name: mongodb-pvolume-claim1
-        persistentVolumeClaim:
-          claimName: mongodb-pvolume-claim1
+#      volumes:
+#      - name: mongodb-pvolume-claim1
+#        persistentVolumeClaim:
+#          claimName: mongodb-pvolume-claim1
 
