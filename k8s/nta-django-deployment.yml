@@ -43,7 +43,7 @@ spec:
         - name: app-data
           hostPath:
             path: /host/app-data
-        - name: source-code
+        - name: django-code
           hostPath:
             path: /host/django-code
 #      volumes:
