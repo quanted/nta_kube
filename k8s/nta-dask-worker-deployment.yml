@@ -30,22 +30,6 @@ spec:
         envFrom:
           - configMapRef:
               name: nta-config
-        livenessProbe:
-          exec:
-            command:
-              - ls
-              - /
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 10
-        readinessProbe:
-          exec:
-            command:
-              - ls
-              - /
-          initialDelaySeconds: 10
-          periodSeconds: 30
-          timeoutSeconds: 10
         resources:
           requests:
             memory: "512Mi"
@@ -54,7 +38,14 @@ spec:
             memory: "2Gi"
             cpu: "2000m"
         name: nta-dask-worker
+        volumeMounts:
+          - mountPath: /src/nta_app
+            name: django-code
       dnsPolicy: ClusterFirst
       hostname: nta-dask-worker
       restartPolicy: Always
       schedulerName: default-scheduler
+      volumes:
+        - name: source-code
+          hostPath:
+            path: /host/django-code

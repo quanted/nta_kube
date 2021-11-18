@@ -48,14 +48,19 @@ spec:
         volumeMounts:
         - mountPath: /src/app-data
           name: app-data
+        - mountPath: /src/nta_flask
+          name: flask-code
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      volumes:
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: app-data-pvolume-claim1
 #      volumes:
-#        - name: app-data
-#          hostPath:
-#            path: /host/app-data
+#      - name: app-data
+#        persistentVolumeClaim:
+#          claimName: app-data-pvolume-claim1
+      volumes:
+        - name: app-data
+          hostPath:
+            path: /host/app-data
+        - name: flask-code
+          hostPath:
+            path: /host/flask-code

@@ -22,23 +22,6 @@ spec:
               name: nta-config
         image: dbsmith88/nta-django:dev-k
         imagePullPolicy: Always
-#        readinessProbe:
-#          tcpSocket:
-#            port: 8080
-#          initialDelaySeconds: 5
-#          periodSeconds: 10
-#        livenessProbe:
-#          tcpSocket:
-#            port: 8080
-#          initialDelaySeconds: 30
-#          periodSeconds: 30
-#        resources:
-#          requests:
-#            memory: "512Mi"
-#            cpu: "250m"
-#          limits:
-#            memory: "1Gi"
-#            cpu: "1000m"
         name: nta-django
         ports:
         - containerPort: 8080
@@ -48,20 +31,25 @@ spec:
           name: collected-static
         - mountPath: /src/app-data
           name: app-data
+        - mountPath: /src/nta_app
+          name: django-code
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-#      volumes:
-#        - name: collected-static
-#          hostPath:
-#            path: /host/collected-static
-#        - name: app-data
-#          hostPath:
-#            path: /host/app-data
       volumes:
-      - name: collected-static
-        persistentVolumeClaim:
-          claimName: collected-static-pvolume-claim1
-      - name: app-data
-        persistentVolumeClaim:
-          claimName: app-data-pvolume-claim1
+        - name: collected-static
+          hostPath:
+            path: /host/collected-static
+        - name: app-data
+          hostPath:
+            path: /host/app-data
+        - name: source-code
+          hostPath:
+            path: /host/django-code
+#      volumes:
+#      - name: collected-static
+#        persistentVolumeClaim:
+#          claimName: collected-static-pvolume-claim1
+#      - name: app-data
+#        persistentVolumeClaim:
+#          claimName: app-data-pvolume-claim1
