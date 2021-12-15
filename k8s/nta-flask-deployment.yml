@@ -22,6 +22,12 @@ spec:
         envFrom:
           - configMapRef:
               name: nta-config
+        env:
+          - name: AURORA_PW
+            valueFrom:
+              secretKeyRef:
+                key: nta_pass.txt
+                name: ms2-db-creds
 #        readinessProbe:
 #          tcpSocket:
 #            port: 8080
@@ -48,19 +54,19 @@ spec:
         volumeMounts:
         - mountPath: /src/app-data
           name: app-data
-        - mountPath: /src/nta_flask
-          name: flask-code
+          #- mountPath: /src/nta_flask
+          #name: flask-code
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-#      volumes:
-#      - name: app-data
-#        persistentVolumeClaim:
-#          claimName: app-data-pvolume-claim1
       volumes:
-        - name: app-data
-          hostPath:
-            path: /host/app-data
-        - name: flask-code
-          hostPath:
-            path: /host/flask-code
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: app-data-pvolume-claim1
+#      volumes:
+              #- name: app-data
+              # hostPath:
+              #path: /host/app-data
+            #- name: flask-code
+            #hostPath:
+            #path: /host/flask-code
