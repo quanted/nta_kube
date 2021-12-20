@@ -3,17 +3,12 @@ kind: Service
 metadata:
   name: nta-nginx
 spec:
-  type: NodePort
   selector:
     app: nta-nginx
   ports:
     - protocol: TCP
       port: 80
-      nodePort: 30000
       targetPort: 80
       nodePort: 31000
       name: http
-<<<<<<< Updated upstream
   type: NodePort
-=======
->>>>>>> Stashed changes
