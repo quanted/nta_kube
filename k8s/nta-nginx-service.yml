@@ -9,9 +9,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 31000
       name: http
-    - protocol: TCP
-      port: 7777
-      targetPort: 7777
-      name: flask-api
-  type: ClusterIP
+  type: NodePort
