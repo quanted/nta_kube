@@ -25,7 +25,7 @@ spec:
         - --no-capture-output
         - dask-worker
         - nta-dask-scheduler:8786
-        image: dbsmith88/nta-dask:latest
+        image: ghcr.io/quanted/nta-dask:dev
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
