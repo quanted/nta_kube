@@ -28,7 +28,7 @@ spec:
         - pyenv
         - --no-capture-output
         - dask-scheduler
-        image: dbsmith88/nta-dask:latest
+        image: ghcr.io/quanted/nta-dask:dev
         imagePullPolicy: Always
 #        readinessProbe:
 #          tcpSocket:

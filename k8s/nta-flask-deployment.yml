@@ -17,7 +17,7 @@ spec:
         app: nta-flask
     spec:
       containers:
-      - image: dbsmith88/nta-flask:dev-k
+      - image: ghcr.io/quanted/nta_flask:dev-k
         imagePullPolicy: Always
         envFrom:
           - configMapRef:

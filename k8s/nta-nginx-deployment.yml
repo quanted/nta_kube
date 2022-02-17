@@ -17,7 +17,7 @@ spec:
         app: nta-nginx
     spec:
       containers:
-        - image: dbsmith88/nta-nginx
+        - image: ghcr.io/quanted/nta_nginx:master
           imagePullPolicy: Always
           name: nginx
           ports:
