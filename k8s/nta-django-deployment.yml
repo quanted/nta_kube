@@ -31,8 +31,8 @@ spec:
           name: collected-static
         - mountPath: /src/app-data
           name: app-data
-        - mountPath: /src/nta_app
-          name: django-code
+        # - mountPath: /src/nta_app  #for local deployment mounts
+        #   name: django-code
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
