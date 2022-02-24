@@ -36,20 +36,20 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      volumes:
-        - name: collected-static
-          hostPath:
-            path: /host/collected-static
-        - name: app-data
-          hostPath:
-            path: /host/app-data
-        - name: django-code
-          hostPath:
-            path: /host/django-code
-#      volumes:
-#      - name: collected-static
-#        persistentVolumeClaim:
-#          claimName: collected-static-pvolume-claim1
-#      - name: app-data
-#        persistentVolumeClaim:
-#          claimName: app-data-pvolume-claim1
+      # volumes:  # For local deployments
+      #   - name: collected-static
+      #     hostPath:
+      #       path: /host/collected-static
+      #   - name: app-data
+      #     hostPath:
+      #       path: /host/app-data
+      #   - name: django-code
+      #     hostPath:
+      #       path: /host/django-code
+      volumes:  # For AWS deployment
+      - name: collected-static
+        persistentVolumeClaim:
+          claimName: collected-static-pvolume-claim1
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: app-data-pvolume-claim1
