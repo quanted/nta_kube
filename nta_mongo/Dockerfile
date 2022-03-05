@@ -1,4 +1,4 @@
-FROM mongo:latest
+FROM mongo:5.0.6-focal
 COPY start_mongo.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/start_mongo.sh
 
