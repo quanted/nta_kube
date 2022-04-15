@@ -38,19 +38,19 @@ spec:
             memory: "2Gi"
             cpu: "2000m"
         name: nta-dask-worker
-        volumeMounts:
-          - mountPath: /src/nta_app
-            name: django-code
-          - mountPath: /src/nta_flask
-            name: flask-code
+        # volumeMounts:
+        #   - mountPath: /src/nta_app
+        #     name: django-code
+        #   - mountPath: /src/nta_flask
+        #     name: flask-code
       dnsPolicy: ClusterFirst
       hostname: nta-dask-worker
       restartPolicy: Always
       schedulerName: default-scheduler
-      volumes:
-        - name: django-code
-          hostPath:
-            path: /host/django-code
-        - name: flask-code
-          hostPath:
-            path: /host/flask-code
+      # volumes:
+      #   - name: django-code
+      #     hostPath:
+      #       path: /host/django-code
+      #   - name: flask-code
+      #     hostPath:
+      #       path: /host/flask-code

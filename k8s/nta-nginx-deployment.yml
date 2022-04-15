@@ -26,11 +26,11 @@ spec:
             - mountPath: /src/collected_static
               name: collected-static
       restartPolicy: Always
-      volumes:
+      # volumes:  # for local deployments
+      #   - name: collected-static
+      #     hostPath:
+      #       path: /host/collected-static
+      volumes:  # for AWS deployment
         - name: collected-static
-          hostPath:
-            path: /host/collected-static
-#      volumes:
-#        - name: collected-static
-#          persistentVolumeClaim:
-#            claimName: collected-static-pvolume-claim1
+          persistentVolumeClaim:
+            claimName: collected-static-pvolume-claim1
