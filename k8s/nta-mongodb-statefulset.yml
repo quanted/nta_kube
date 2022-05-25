@@ -28,7 +28,7 @@ spec:
             memory: "512Mi"
             cpu: "500m"
           limits:
-            memory: "1Gi"
+            memory: "2Gi"
             cpu: "1000m"
         name: nta-mongodb
 #        readinessProbe:

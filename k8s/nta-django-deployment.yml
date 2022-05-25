@@ -20,7 +20,7 @@ spec:
       - envFrom:
           - configMapRef:
               name: nta-config
-        image: ghcr.io/quanted/nta_app:dev-k
+        image: ghcr.io/quanted/nta_app:dev-k-dask
         imagePullPolicy: Always
         name: nta-django
         ports:
