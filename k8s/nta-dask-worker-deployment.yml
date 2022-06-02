@@ -5,7 +5,7 @@ metadata:
     app: nta-dask-worker
   name: nta-dask-worker
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: nta-dask-worker
@@ -25,7 +25,7 @@ spec:
         - --no-capture-output
         - dask-worker
         - nta-dask-scheduler:8786
-        image: ghcr.io/quanted/nta-dask:dev
+        image: ghcr.io/quanted/nta-dask:dev-k-dask
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
@@ -35,7 +35,7 @@ spec:
             memory: "512Mi"
             cpu: "250m"
           limits:
-            memory: "2Gi"
+            memory: "8Gi"
             cpu: "2000m"
         name: nta-dask-worker
         # volumeMounts:
