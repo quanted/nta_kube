@@ -8,7 +8,7 @@ RUN apt-get install --no-install-recommends git build-essential python3-dev libp
 WORKDIR /src/
 
 RUN cd /src/ && git clone -b dev-k-dask https://github.com/quanted/nta_app.git
-RUN cd /src/ && git clone -b dev-k-dask https://github.com/quanted/nta_flask.git
+RUN cd /src/ && git clone -b dev-k https://github.com/quanted/nta_flask.git
 
 RUN conda create --name pyenv python=3.9
 
